@@ -1,11 +1,12 @@
 \BOOKMARK [1][-]{section*.4}{Introduction}{}% 1
-\BOOKMARK [1][-]{section*.5}{Overview}{}% 2
-\BOOKMARK [2][-]{section*.6}{Normalisation of Timeseries to make them comparable}{section*.5}% 3
-\BOOKMARK [2][-]{section*.7}{Clustering timeseries}{section*.5}% 4
-\BOOKMARK [2][-]{section*.8}{Compute consensus timeseries}{section*.5}% 5
-\BOOKMARK [2][-]{section*.9}{Alignment to find trend-state}{section*.5}% 6
-\BOOKMARK [1][-]{section*.10}{Paulas method}{}% 7
-\BOOKMARK [1][-]{section*.11}{results}{}% 8
-\BOOKMARK [1][-]{section*.12}{conclusion}{}% 9
-\BOOKMARK [1][-]{section*.13}{Acknowledgments}{}% 10
-\BOOKMARK [1][-]{section*.14}{REFERENCES }{}% 11
+\BOOKMARK [1][-]{section*.5}{Related Work}{}% 2
+\BOOKMARK [1][-]{section*.6}{Overview}{}% 3
+\BOOKMARK [2][-]{section*.7}{Normalisation of Timeseries to make them comparable}{section*.6}% 4
+\BOOKMARK [2][-]{section*.8}{Clustering timeseries}{section*.6}% 5
+\BOOKMARK [2][-]{section*.9}{Compute consensus timeseries}{section*.6}% 6
+\BOOKMARK [2][-]{section*.10}{Alignment to find trend-state}{section*.6}% 7
+\BOOKMARK [1][-]{section*.11}{Paulas method}{}% 8
+\BOOKMARK [1][-]{section*.12}{results}{}% 9
+\BOOKMARK [1][-]{section*.13}{conclusion}{}% 10
+\BOOKMARK [1][-]{section*.14}{Acknowledgments}{}% 11
+\BOOKMARK [1][-]{section*.15}{REFERENCES }{}% 12

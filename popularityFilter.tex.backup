@@ -60,12 +60,12 @@ breaklinks=true,
 
 % create a shortcut to typeset table headings
 \newcommand\tabhead[1]{\small\textbf{#1}}
-
+\newcommand{\putat}[3]{\begin{picture}(0,0)(0,0)\put(#1,#2){#3}\end{picture}}
 
 % End of preamble. Here it comes the document.
 \begin{document}
 
-\title{SIGCHI Conference Proceedings Format}
+\title{Sovereignty of the people: \\introducing app-usage and trend filters based on actual popularity and usage rather than recommendations}
 
 \numberofauthors{3}
 \author{
@@ -87,7 +87,7 @@ breaklinks=true,
 }
 
 \maketitle
-
+\putat{310}{130}{\includegraphics[height=1cm]{Figures/appstorePeople03.png}}
 \begin{abstract}
 In this paper we describe the formatting requirements for
 SIGCHI Conference Proceedings, and this sample file
@@ -95,6 +95,7 @@ offers recommendations on writing for the worldwide
 SIGCHI readership. Please review this document even if
 you have submitted to SIGCHI conferences before, some
 format details have changed relative to previous years.
+
 \end{abstract}
 
 \keywords{
@@ -135,7 +136,19 @@ Of course, users are usually supported by a recommendation system in which apps 
 While useful, this system favours apps with a bigger crowd of users such as corporation-developed apps or older and therefore better known apps.
 For instance, an app which is popular and frequently used in a small community of users might have low chance to be discovered by a greater public due to fewer ratings. 
 Clearly, absolute user number wins over relative high satisfaction of a smaller crowd of app-users.
-Paradoxically, offensively annoy users to submit a rrewith requests to submit a recommendation is a better strategy to rate them stand a better chance to receive high recommendations than 
+Paradoxically, offensively annoy users to submit recommendations is a superior strategy to just satisfying users with a superb app.  
+
+Furthermore, the system can be to some extent subject to fraud. 
+And, most importantly, since they are based on historical data, recommendations might not reflect the actual usage patterns as well as current popularity and trends.
+
+We propose the use of an app-usage filter which shows actual relative popularity of apps based on their daily usage, indicates trends regardless of absolute volume and identifies app-lifecycles. 
+Lifecycles are, for instance, flops, dead applications, trendy apps quickly gaining users as well as apps of continouous high popularity. 
+
+We exploit the Carat data \textbf{\cite{???}} collected from \textbf{???} phones over a period of \textbf{???} months (\textbf{???} till \textbf{???}) to demonstrate our approach.
+Based on this data, we cluster app-usage time series with similar patterns together in order to identify typical app life-cycles.
+
+From these lifecycle-templates we are then able with alignment matching methods to identify for new apps where in the lifecycle they are currently.
+
 
 
 \section{Overview}
@@ -155,7 +168,42 @@ k-means and features
 \subsection{Compute consensus timeseries}
 explain the approach
 \subsection{Alignment to find trend-state}
-explain alignment method
+\textbf{explain alignment method -- revise below text}
+
+In the algorithm, two strings are compared for the best approximative pattern among them, as depicted in figure~\ref{figurePatternMatching}.
+\begin{figure}
+      \includegraphics[width=8cm, height=4.5cm]{AlignmentScheme_120130_v7_STS.pdf}
+     \caption{Schematic illustration of the Smith-Waterman pattern matching}
+     \label{figurePatternMatching}
+\end{figure}
+The figure illustrates the operation to find a sub-sequence similar to a pattern $p=p_1\dots p_k$ in a longer sequence $s=s_1\dots s_n$.
+The matrix is filled from left to right and from top to bottom.
+Each matrix entry $M_{ij}$ contains the minimum cost to align $p_1\dots p_i$ with $s_1\dots s_j$.
+It is obtained iteratively from the cost of the cells $M_{i-1,j-1},M_{i-1,j},M_{i,j-1}$ by choosing the minimum cost for an extension of any of these three alignments (extension of both strings, extension of only the first string or extension of only the second string).
+The first row is initialised with $0$ to allow the pattern to start at any position within $s$.
+The careful choice of the gap-penalty $g$ is crucial for the approach to produce good matching results.
+The best matching string is obtained by backtracking the smallest entry in the last row.
+
+Since the matching is approximative, we will always find a best matching position even though the absolute similarity of this very position might not be high.
+we exploit this property to be able to resign from any information transmitted among devices on the actual recorded audio.
+In particular, we utilize a predefined, characteristic pattern on both devices.
+since the pattern is known in advance, no information need to be transmitted.
+The downside to this implementation is, of course, that the pattern utilised might be very different from the actual audio recorded.
+However, since the Smith-Waterman algorithm always computes a best matching, we can speculate that this best matching is found at similar positions in the audio recordings, provided that the data has significant similarity.
+The best matching, although it might not be a good matching in absolute terms, is likely to be found at a similar position in the recorded audio of the remote devices.
+
+The specific pattern used for matching is extracted randomly from consecutive samples of an arbitrary audio sequence. 
+In our experiments, its length is 100 samples. Longer patterns increase running time of the algorithm without improving the accuracy of the matching. 
+Due to the fact that our sampling rate is 44100Hz, a 100-sample pattern is equivalent to a 0.003-second audio chunk. 
+
+The pattern $p$ is matched in the first part of each audio file $s$, which is $100000$ samples long. 
+The matching score of $p$ and a local part $l$ of $s$ is the difference between amplitude values in $p$ and $l$. 
+The less the score, the more similar $p$ and $l$ are.
+We maintain a matrix to store the scores  and another for tracing. 
+Backtracking starts at the lowest scoring matrix cell. 
+According to our experiments, the gap penalty that can yield an acceptable matching is $150$. 
+After finding the matching position, we can eliminate all samples preceding this position and generate the audio fingerprint from the remaining ones.
+
 
 \section{Paulas method}
 
